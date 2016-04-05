@@ -1,0 +1,12 @@
+{
+    "name": "lockr/lockr-client",
+    "description": "Client for use with Lockr off-site key management service.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Tynor Fujimoto",
+            "email": "tynor@lockr.io"
+        }
+    ],
+    "require": {}
+}
