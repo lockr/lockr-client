@@ -8,5 +8,10 @@
             "email": "tynor@lockr.io"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+      "psr-4": {
+        "Lockr\\": "src/"
+      }
+    }
 }
