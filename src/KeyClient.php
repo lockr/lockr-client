@@ -50,16 +50,7 @@ class KeyClient
      */
     public function get($name)
     {
-        list($status, $body) = $this->client->get($this->uri($name));
-
-        $body = json_decode($body, true);
-
-        if (json_last_error() !== JSON_ERROR_NONE || $status >= 500) {
-            throw new ServerException();
-        }
-        if ($status >= 400) {
-            throw new ClientException();
-        }
+        $body = $this->client->get($this->uri($name));
 
         if (null !== $this->encoded) {
             return $this->decrypt($body['key_value'], $this->encoded);
@@ -89,14 +80,7 @@ class KeyClient
             'key_value' => $value,
             'key_label' => $label,
         );
-        list($status, $body) = $this->client->patch($this->uri($name), $data);
-
-        if ($status >= 500) {
-            throw new ServerException($body);
-        }
-        if ($status >= 400) {
-            throw new ClientException($body);
-        }
+        $this->client->patch($this->uri($name), $data);
 
         if ($this->encoded) {
             return $encoded;
