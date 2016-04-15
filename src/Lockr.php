@@ -3,6 +3,10 @@
 
 namespace Lockr;
 
+use Lockr\Exception\ClientException;
+use Lockr\Exception\LockrException;
+use Lockr\Exception\ServerException;
+
 /**
  * Primary interface for Lockr API calls.
  */

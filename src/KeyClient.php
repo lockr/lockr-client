@@ -3,9 +3,6 @@
 
 namespace Lockr;
 
-use Lockr\Exception\ClientException;
-use Lockr\Exception\ServerException;
-
 class KeyClient
 {
     /**
