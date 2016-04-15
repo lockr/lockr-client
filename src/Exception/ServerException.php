@@ -3,6 +3,6 @@
 
 namespace Lockr\Exception;
 
-class ServerException extends \Exception
+class ServerException extends LockrException
 {
 }
