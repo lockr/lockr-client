@@ -3,7 +3,7 @@
 
 namespace Lockr\Exception;
 
-class ClientException extends LockrException
+class LockrClientException extends LockrException
 {
 }
 

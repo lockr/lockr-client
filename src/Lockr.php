@@ -3,9 +3,9 @@
 
 namespace Lockr;
 
-use Lockr\Exception\ClientException;
 use Lockr\Exception\LockrException;
-use Lockr\Exception\ServerException;
+use Lockr\Exception\LockrClientException;
+use Lockr\Exception\LockrServerException;
 
 /**
  * Primary interface for Lockr API calls.
@@ -183,9 +183,9 @@ class Lockr
         );
 
         if ($status >= 500) {
-            throw new ServerException($params);
+            throw new LockrServerException($params);
         }
 
-        throw new ClientException($params);
+        throw new LockrClientException($params);
     }
 }
