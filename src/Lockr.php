@@ -182,7 +182,7 @@ class Lockr
             'code' => $code,
         );
 
-        if ($status >= 500) {
+        if ($code >= 500) {
             throw new LockrServerException($params);
         }
 
