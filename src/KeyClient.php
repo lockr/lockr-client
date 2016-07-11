@@ -56,6 +56,26 @@ class KeyClient
     }
 
     /**
+     * Creates a key in Lockr.
+     *
+     * @param string $name The key name.
+     * @param string $label The key label.
+     *
+     * @return string Returns the created key value.
+     */
+    public function create($name, $label)
+    {
+        $data = array(
+            'create' => true,
+            'key_label' => $label,
+        );
+
+        $body = $this->client->patch($this->uri($name), $data);
+
+        return $body['key_value'];
+    }
+
+    /**
      * Sets a key in Lockr.
      *
      * @param string $name The key name.
