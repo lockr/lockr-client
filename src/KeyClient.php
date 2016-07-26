@@ -65,7 +65,7 @@ class KeyClient
     public function create($key_size)
     {
         $body = $this->client->get("/v1/generate-key?key_size={$key_size}");
-        return $body['key_value'];
+        return base64_decode($body['key_value']);
     }
 
     /**
