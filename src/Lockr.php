@@ -89,7 +89,8 @@ class Lockr
 
     public function post($uri, $data, $auth = null)
     {
-        $uri = $this->partner->getWriteUri().$uri;
+        // horrible hack needed until Lockr v2
+        $uri = $this->partner->getAccountingUri().$uri;
         $options = $this->partner->requestOptions();
         $options['data'] = $data;
         if (null !== $auth) {

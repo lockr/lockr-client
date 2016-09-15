@@ -16,12 +16,18 @@ class Partner implements PartnerInterface
     protected $partner;
 
     /**
+     * @var string The Lockr region.
+     */
+    protected $region;
+
+    /**
      * Constucts the partner.
      */
-    public function __construct($cert, $partner)
+    public function __construct($cert, $partner, $region = 'us')
     {
         $this->cert = $cert;
         $this->partner = $partner;
+        $this->region = $region;
     }
 
     /**
@@ -39,6 +45,10 @@ class Partner implements PartnerInterface
      */
     public function getReadUri()
     {
+        if ($this->region != 'us') {
+            return "https://{$this->region}.{$this->partner}.api.lockr.io";
+        }
+
         return "https://{$this->partner}.api.lockr.io";
     }
 
@@ -46,6 +56,18 @@ class Partner implements PartnerInterface
      * {@inheritdoc}
      */
     public function getWriteUri()
+    {
+        if ($this->region != 'us') {
+            return "https://{$this->region}.{$this->partner}.api.lockr.io";
+        }
+
+        return "https://{$this->partner}.api.lockr.io";
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAccountingUri()
     {
         return "https://{$this->partner}.api.lockr.io";
     }
