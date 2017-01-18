@@ -39,11 +39,11 @@ class SiteClient
     {
         $body = $this->client->get('/v1/site/exists');
 
-        return array(
-            isset($body['cert_valid']) ? (bool) $body['cert_valid'] : false,
-            isset($body['exists']) ? (bool) $body['exists'] : false,
-            isset($body['available']) ? (bool) $body['available'] : false,
-            isset($body['has_cc']) ? (bool) $body['has_cc'] : false,
+        return $body + array(
+            'cert_valid' => false,
+            'exists' => false,
+            'available' => false,
+            'has_cc' => false,
         );
     }
 
