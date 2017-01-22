@@ -87,9 +87,10 @@ class KeyClient
             } else {
                 $ret = MultiKeyWrapper::reencrypt($value, $encoded);
             }
+            $value = $ret['ciphertext'];
         }
         $data = array(
-            'key_value' => $ret['ciphertext'],
+            'key_value' => $value,
             'key_label' => $label,
         );
         $this->client->patch($this->uri($name), $data);
