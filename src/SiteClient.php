@@ -68,12 +68,18 @@ class SiteClient
     {
         $body = $this->client->get('/v1/site/exists');
 
-        return $body + array(
+        $defaults = array(
             'cert_valid' => false,
             'exists' => false,
             'available' => false,
             'has_cc' => false,
         );
+
+        if (is_array($body)) {
+            return $body + $defaults;
+        }
+
+        return $defaults;
     }
 
     /**
