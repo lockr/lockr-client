@@ -153,16 +153,16 @@ class Lockr
         $resp = curl_exec($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
+        if ($code >= 400) {
+            $this->handleError($code, $body);
+        }
+
         $body = json_decode($resp, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new LockrException(array(
                 'message' => $resp,
                 'code' => $code,
             ));
-        }
-
-        if ($code >= 400) {
-            $this->handleError($code, $body);
         }
 
         return $body;
