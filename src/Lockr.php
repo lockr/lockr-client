@@ -152,13 +152,20 @@ class Lockr
 
         $resp = curl_exec($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $body = json_decode($resp, true);
+        $json_error = json_last_error();
 
         if ($code >= 400) {
+            if ($json_error !== JSON_ERROR_NONE) {
+                $body = array(
+                    'title' => 'Unrecognized body',
+                    'description' => $resp,
+                );
+            }
             $this->handleError($code, $body);
         }
 
-        $body = json_decode($resp, true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
+        if ($json_error !== JSON_ERROR_NONE) {
             throw new LockrException(array(
                 'message' => $resp,
                 'code' => $code,
