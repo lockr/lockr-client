@@ -165,6 +165,10 @@ class Lockr
             $this->handleError($code, $body);
         }
 
+        if (!$resp) {
+            return true;
+        }
+
         if ($json_error !== JSON_ERROR_NONE) {
             throw new LockrException(array(
                 'message' => $resp,
