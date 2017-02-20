@@ -16,7 +16,7 @@ class LockrAes128CtrSha256KeyWrapper implements KeyWrapperInterface
      */
     public static function enabled()
     {
-        return phpversion('openssl');
+        return function_exists('openssl_encrypt');
     }
 
     /**

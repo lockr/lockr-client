@@ -10,7 +10,7 @@ class LockrAesCbcKeyWrapper implements KeyWrapperInterface
      */
     public static function enabled()
     {
-        return phpversion('mcrypt') && phpversion('openssl');
+        return function_exists('mcrypt_encrypt') && function_exists('openssl_encrypt');
     }
 
     /**
