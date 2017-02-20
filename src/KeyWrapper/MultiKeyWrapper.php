@@ -59,7 +59,7 @@ class MultiKeyWrapper implements KeyWrapperInterface
     {
         foreach (self::$wrappers as $prefix => $wrapper) {
             if (substr($encoded, 0, strlen($prefix)) === $prefix) {
-                return $wrapper::reecrypt($ciphertext, $encoded);
+                return $wrapper::reencrypt($plaintext, $encoded);
             }
         }
 
