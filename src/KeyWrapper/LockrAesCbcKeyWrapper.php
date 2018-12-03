@@ -18,21 +18,23 @@ class LockrAesCbcKeyWrapper implements KeyWrapperInterface
      */
     public static function encrypt($plaintext)
     {
-        $cipher = MCRYPT_RIJNDAEL_256;
-        $mode = MCRYPT_MODE_CBC;
+        if (version_compare(PHP_VERSION, '7.2', '<')) {
+            $cipher = MCRYPT_RIJNDAEL_256;
+            $mode = MCRYPT_MODE_CBC;
 
-        $key = openssl_random_pseudo_bytes(32);
-        $iv_len = mcrypt_get_iv_size($cipher, $mode);
-        $iv = mcrypt_create_iv($iv_len);
+            $key = openssl_random_pseudo_bytes(32);
+            $iv_len = mcrypt_get_iv_size($cipher, $mode);
+            $iv = mcrypt_create_iv($iv_len);
 
-        $ciphertext = mcrypt_encrypt($cipher, $key, $plaintext, $mode, $iv);
-        $ciphertext = base64_encode($ciphertext);
-        $encoded = self::encode($cipher, $mode, $iv, $key);
+            $ciphertext = mcrypt_encrypt($cipher, $key, $plaintext, $mode, $iv);
+            $ciphertext = base64_encode($ciphertext);
+            $encoded = self::encode($cipher, $mode, $iv, $key);
 
-        return array(
-            'ciphertext' => $ciphertext,
-            'encoded' => $encoded,
-        );
+            return array(
+                'ciphertext' => $ciphertext,
+                'encoded' => $encoded,
+            );
+        }
     }
 
     /**
